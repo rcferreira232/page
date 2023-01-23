@@ -10,3 +10,7 @@ const navBtn = getElement('.nav-btn');
 navBtn.addEventListener('click', ()=>{
     links.classList.toggle('show-links');
 })
+
+const year = new Date().getFullYear();
+const currentYear = getElement('#date');
+currentYear.textContent = year;
