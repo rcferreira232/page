@@ -298,5 +298,40 @@ ul {
     padding: 1rem 0.15rem;
 }
 
+@media screen and (min-width: 992px){
+    .nav-btn{
+        display: none;
+    }
+    .navbar{
+        height: 6rem;
+    }
+    .nav-center{
+        display: flex;
+        align-items: center;
+        /* background: red; */
+    }
+    .nav-header{
+        height: auto;
+        margin-right: 2rem;
+        /* background: yellow; */
+    }
+    .nav-links{
+        height: auto;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+    }
+    .nav-link{
+        padding: 0;
+        border-top: none;
+        margin-right: 1rem;
+    }
+    .contact-btn{
+        margin-left: auto;
+        margin-right: 0;
+    }
+}
+
+
 /* page */
 /* footer */
