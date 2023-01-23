@@ -280,12 +280,20 @@ ul {
 .nav-links{
     display: flex;
     flex-direction: column;
+    height: 0;
+    overflow: hidden;
+    transition: var(--transition);
+    /* 317px ~320px */
+}
+.show-links{
+    height: 317px;
 }
 .nav-link{
     display: block;
     text-align: center;
     text-transform: capitalize;
     color: var(--grey-900);
+    letter-spacing: var(--letterSpacing);
     border-top: 1px solid var(--grey-500);
     padding: 1rem 0.15rem;
 }
