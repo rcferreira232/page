@@ -255,5 +255,40 @@ ul {
 }
 
 /* nav */
+.navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-center{
+    width: 90vw;
+    max-width: var(--max-width);
+}
+.nav-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6rem;
+}
+.nav-logo{
+    display: flex;
+    align-items: center;
+}
+.nav-logo img{
+    width: 200px;
+}
+.nav-links{
+    display: flex;
+    flex-direction: column;
+}
+.nav-link{
+    display: block;
+    text-align: center;
+    text-transform: capitalize;
+    color: var(--grey-900);
+    border-top: 1px solid var(--grey-500);
+    padding: 1rem 0.15rem;
+}
 
-
+/* page */
+/* footer */
