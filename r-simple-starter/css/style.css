@@ -331,7 +331,25 @@ ul {
         margin-right: 0;
     }
 }
-
-
 /* page */
+.page{
+    width: 90vw;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    /* background: red; */
+}
 /* footer */
+.page-footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--black);
+    color: var(--white);
+    height: 4rem;
+}
+.page-footer p{
+    margin-bottom: 0;
+}
+.footer-logo, .page-footer a{
+    color: var(--primary-500);
+}
