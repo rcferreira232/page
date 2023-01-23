@@ -336,6 +336,7 @@ ul {
     width: 90vw;
     max-width: var(--max-width);
     margin: 0 auto;
+    min-height: calc(100vh - (6rem + 4rem));
     /* background: red; */
 }
 /* footer */
