@@ -339,6 +339,38 @@ ul {
     min-height: calc(100vh - (6rem + 4rem));
     /* background: red; */
 }
+/* hero */
+.hero{
+    background: url("../img/pru.jpg") center top/cover no-repeat;
+    height: 40vh;
+    border-radius: var(--borderRadius);
+    position: relative;
+    margin-bottom: 2rem;
+}
+.hero-container{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6) ;
+    border-radius: var(--borderRadius);
+}
+
+.hero-text{
+    text-align: center;
+    color: var(--white);
+}
+@media screen and (min-width: 768px) {
+    .hero-text h1{
+        font-size: 4rem;
+        margin-bottom: 0;
+    }
+}
+
 /* footer */
 .page-footer{
     display: flex;
