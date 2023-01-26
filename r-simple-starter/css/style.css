@@ -370,6 +370,7 @@ ul {
         margin-bottom: 0;
     }
 }
+/* cards */
 
 /* footer */
 .page-footer{
@@ -386,3 +387,4 @@ ul {
 .footer-logo, .page-footer a{
     color: var(--primary-500);
 }
+
