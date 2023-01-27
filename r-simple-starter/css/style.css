@@ -423,7 +423,37 @@ ul {
     margin-top: 0.5rem;
     color: var(--grey-500);
     letter-spacing: var(--letterSpacing);
-}    
+} 
+@media screen and (min-width: 576px) {
+    .pigeons-list{
+        grid-template-columns: 1fr 1fr;
+    }
+    .ricepe-img{
+        height: 10rem;
+    }
+}
+@media screen and (min-width: 992px){
+    .pigeon-container{
+        grid-template-columns: 200px 1fr;
+    }
+    .tags-container{
+        order: 0;
+    }
+    .tags-list{
+        grid-template-columns: 1fr;
+    }
+    .pigeon p{
+        font-size: 0.85rem;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .pigeons-list{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .pigeon h5{
+        font-size: 1.05rem;
+    }
+}
 /* footer */
 .page-footer{
     display: flex;
