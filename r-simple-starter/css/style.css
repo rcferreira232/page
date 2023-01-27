@@ -428,7 +428,7 @@ ul {
     .pigeons-list{
         grid-template-columns: 1fr 1fr;
     }
-    .ricepe-img{
+    .pigeon-img{
         height: 10rem;
     }
 }
