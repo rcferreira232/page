@@ -136,7 +136,7 @@ ul {
 .btn {
     cursor: pointer;
     color: var(--white);
-    background: var(--primary-500);
+    background: var(--black);
     border: transparent;
     border-radius: var(--borderRadius);
     letter-spacing: var(--letterSpacing);
@@ -370,8 +370,6 @@ ul {
         margin-bottom: 0;
     }
 }
-/* cards */
-
 /* footer */
 .page-footer{
     display: flex;
