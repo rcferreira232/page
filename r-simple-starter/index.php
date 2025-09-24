@@ -66,9 +66,6 @@ $uniqueColors = array_unique(array_filter(array_column($allPigeons, 'color')));
                 <a href="./index.php" class="nav-logo">
                     <img src="./img/pombo_logo.svg" alt="pombo retailing united">
                 </a>
-                <button type="button" class="btn nav-btn">
-                    <i class="fas fa-align-justify"></i>
-                </button>
             </div>
             <div class="nav-links">
                 <a href="./index.php" class="nav-link">home</a>
