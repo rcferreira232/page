@@ -67,18 +67,42 @@ $cartCount = $cart->getItemCount();
             background: #dc3545;
             color: white;
             border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.8em;
+            font-size: 0.7em;
             position: absolute;
-            top: -5px;
-            right: -5px;
-            min-width: 18px;
-            text-align: center;
-            line-height: 1.2;
+            top: -10px;
+            right: -10px;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            line-height: 1;
+            padding: 0;
         }
         
         .cart-btn {
             position: relative;
+            overflow: visible !important;
+        }
+        
+        .cart-btn .btn {
+            overflow: visible !important;
+            position: relative;
+        }
+        
+        .nav-links {
+            overflow: visible !important;
+        }
+        
+        .nav-center {
+            overflow: visible !important;
+        }
+        
+        .navbar {
+            overflow: visible !important;
         }
         
         .pigeon-actions {
