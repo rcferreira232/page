@@ -1,10 +1,14 @@
+<?php
+// Simple PHP site converted from HTML
+// Page: Home/Index
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple || Starter</title>
+    <title>Pombo Retailing United</title>
     <!-- favicon -->
     <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     <!-- normalize -->
@@ -19,20 +23,20 @@
     <nav class="navbar">
         <div class="nav-center">
             <div class="nav-header">
-                <a href="./index.html" class="nav-logo">
-                    <img src="./img/simple_logo6.svg" alt="simple starter">
+                <a href="./index.php" class="nav-logo">
+                    <img src="./img/pombo_logo.svg" alt="pombo retailing united">
                 </a>
                 <button type="button" class="btn nav-btn">
                     <i class="fas fa-align-justify"></i>
                 </button>
             </div>
             <div class="nav-links">
-                <a href="./index.html" class="nav-link">home</a>
-                <a href="./about.html" class="nav-link">about</a>
-                <a href="./tags.html" class="nav-link">tags</a>
-                <a href="./base.html" class="nav-link">base</a>
+                <a href="./index.php" class="nav-link">home</a>
+                <a href="./about.php" class="nav-link">about</a>
+                <a href="./tags.php" class="nav-link">tags</a>
+                <a href="./base.php" class="nav-link">base</a>
                 <div class="nav-link contact-btn">
-                    <a href="./contact.html" class="btn">contact</a>
+                    <a href="./contact.php" class="btn">contact</a>
                 </div>
             </div>
         </div>
@@ -56,33 +60,33 @@
             <div class="tags-container">
                 <h4>pigeon</h4>
                 <div class="tags-list">
-                    <a href="./tag-template.html">black</a>
-                    <a href="./tag-template.html">grey</a>
-                    <a href="./tag-template.html">brown</a>
-                    <a href="./tag-template.html">white</a>
+                    <a href="./tag-template.php">black</a>
+                    <a href="./tag-template.php">grey</a>
+                    <a href="./tag-template.php">brown</a>
+                    <a href="./tag-template.php">white</a>
                 </div>
             </div>
             <div class="pigeons-list">
                 <!-- #1 -->
-                <a href="./single-pigeon.html" class="pigeon">
+                <a href="./single-pigeon.php" class="pigeon">
                     <img src="./img/pru.jpg" alt="pigeon" class="img pigeon-img">
                     <h5>black</h5>
                     <p>price : R$ 15,00  | name : rudolf</p>
                 </a>
                 <!-- #2 -->
-                <a href="./single-pigeon.html" class="pigeon">
+                <a href="./single-pigeon.php" class="pigeon">
                     <img src="./img/pru.jpg" alt="pigeon" class="img pigeon-img">
                     <h5>grey</h5>
                     <p>price : R$ 15,00  | name : rudolf</p>
                 </a>
                 <!-- #3 -->
-                <a href="./single-pigeon.html" class="pigeon">
+                <a href="./single-pigeon.php" class="pigeon">
                     <img src="./img/pru.jpg" alt="pigeon" class="img pigeon-img">
                     <h5>brown</h5>
                     <p>price : R$ 15,00  | name : rudolf</p>
                 </a>
                 <!-- #4 -->
-                <a href="./single-pigeon.html" class="pigeon">
+                <a href="./single-pigeon.php" class="pigeon">
                     <img src="./img/pru.jpg" alt="pigeon" class="img pigeon-img">
                     <h5>white</h5>
                     <p>price : R$ 15,00  | name : rudolf</p>
@@ -96,7 +100,7 @@
         <p>
             &copy;
             <span id="date"></span>
-            <span class="footer-logo">SimpleStarter</span>
+            <span class="footer-logo">Pombo Retailing United</span>
             Built by 
             <a href="https://github.com/rcferreira232/page" target="_blank" rel="noopener noreferrer">rcferreira232</a> 
         </p>
