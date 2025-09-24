@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#645cff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#504acc;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="200" height="60" fill="url(#gradient)" rx="8"/>
+  
+  <!-- Pombo text -->
+  <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">POMBO</text>
+  
+  <!-- Retailing United text -->
+  <text x="20" y="42" font-family="Arial, sans-serif" font-size="10" fill="white">RETAILING UNITED</text>
+  
+  <!-- Simple bird/pigeon icon -->
+  <circle cx="160" cy="20" r="8" fill="white" opacity="0.8"/>
+  <ellipse cx="155" cy="18" rx="3" ry="4" fill="white" opacity="0.8"/>
+  <circle cx="157" cy="17" r="1" fill="#645cff"/>
+  <path d="M168 20 L173 18 L173 22 Z" fill="white" opacity="0.8"/>
+</svg>
