@@ -177,6 +177,14 @@ $allPigeons = $pigeon->getAll();
                 <div class="pigeon-grid">
                     <?php foreach ($allPigeons as $p): ?>
                         <div class="pigeon-card">
+                            <?php if ($p['image_url']): ?>
+                                <div class="pigeon-image" style="margin-bottom: 15px;">
+                                    <img src="<?php echo htmlspecialchars($p['image_url']); ?>" 
+                                         alt="<?php echo htmlspecialchars($p['name']); ?>" 
+                                         style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px;"
+                                         onerror="this.style.display='none'">
+                                </div>
+                            <?php endif; ?>
                             <h3>
                                 <i class="fas fa-dove"></i>
                                 <?php echo htmlspecialchars($p['name']); ?>

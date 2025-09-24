@@ -23,9 +23,10 @@ if ($_POST) {
         $color = trim($_POST['color'] ?? '');
         $age = intval($_POST['age'] ?? 0);
         $description = trim($_POST['description'] ?? '');
+        $image_url = trim($_POST['image_url'] ?? '');
         
         if (!empty($name)) {
-            if ($pigeon->create($name, $breed, $color, $age, $description, $_SESSION['user_id'])) {
+            if ($pigeon->create($name, $breed, $color, $age, $description, $image_url, $_SESSION['user_id'])) {
                 $message = 'Pombo cadastrado com sucesso!';
                 $messageType = 'success';
             } else {
@@ -284,6 +285,10 @@ $allPigeons = $pigeon->getAll();
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="image_url">Link da Imagem:</label>
+                            <input type="url" id="image_url" name="image_url" placeholder="https://exemplo.com/imagem.jpg">
+                        </div>
+                        <div class="form-group">
                             <label for="description">Descrição:</label>
                             <textarea id="description" name="description" rows="4"></textarea>
                         </div>
@@ -304,6 +309,14 @@ $allPigeons = $pigeon->getAll();
                         <div class="pigeon-grid">
                             <?php foreach ($userPigeons as $p): ?>
                                 <div class="pigeon-card">
+                                    <?php if ($p['image_url']): ?>
+                                        <div class="pigeon-image" style="margin-bottom: 15px;">
+                                            <img src="<?php echo htmlspecialchars($p['image_url']); ?>" 
+                                                 alt="<?php echo htmlspecialchars($p['name']); ?>" 
+                                                 style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;"
+                                                 onerror="this.style.display='none'">
+                                        </div>
+                                    <?php endif; ?>
                                     <h3><i class="fas fa-dove"></i> <?php echo htmlspecialchars($p['name']); ?></h3>
                                     <div class="pigeon-info">
                                         <?php if ($p['breed']): ?>
@@ -344,6 +357,14 @@ $allPigeons = $pigeon->getAll();
                         <div class="pigeon-grid">
                             <?php foreach ($allPigeons as $p): ?>
                                 <div class="pigeon-card">
+                                    <?php if ($p['image_url']): ?>
+                                        <div class="pigeon-image" style="margin-bottom: 15px;">
+                                            <img src="<?php echo htmlspecialchars($p['image_url']); ?>" 
+                                                 alt="<?php echo htmlspecialchars($p['name']); ?>" 
+                                                 style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;"
+                                                 onerror="this.style.display='none'">
+                                        </div>
+                                    <?php endif; ?>
                                     <h3><i class="fas fa-dove"></i> <?php echo htmlspecialchars($p['name']); ?></h3>
                                     <div class="pigeon-info">
                                         <?php if ($p['breed']): ?>

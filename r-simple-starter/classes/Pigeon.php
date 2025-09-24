@@ -9,10 +9,10 @@ class Pigeon {
         $this->db = $database->getConnection();
     }
     
-    public function create($name, $breed, $color, $age, $description, $user_id) {
+    public function create($name, $breed, $color, $age, $description, $image_url, $user_id) {
         try {
-            $stmt = $this->db->prepare("INSERT INTO pigeons (name, breed, color, age, description, user_id) VALUES (?, ?, ?, ?, ?, ?)");
-            return $stmt->execute([$name, $breed, $color, $age, $description, $user_id]);
+            $stmt = $this->db->prepare("INSERT INTO pigeons (name, breed, color, age, description, image_url, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            return $stmt->execute([$name, $breed, $color, $age, $description, $image_url, $user_id]);
         } catch(PDOException $e) {
             return false;
         }
@@ -53,10 +53,10 @@ class Pigeon {
         }
     }
     
-    public function update($id, $name, $breed, $color, $age, $description, $user_id) {
+    public function update($id, $name, $breed, $color, $age, $description, $image_url, $user_id) {
         try {
-            $stmt = $this->db->prepare("UPDATE pigeons SET name = ?, breed = ?, color = ?, age = ?, description = ? WHERE id = ? AND user_id = ?");
-            return $stmt->execute([$name, $breed, $color, $age, $description, $id, $user_id]);
+            $stmt = $this->db->prepare("UPDATE pigeons SET name = ?, breed = ?, color = ?, age = ?, description = ?, image_url = ? WHERE id = ? AND user_id = ?");
+            return $stmt->execute([$name, $breed, $color, $age, $description, $image_url, $id, $user_id]);
         } catch(PDOException $e) {
             return false;
         }

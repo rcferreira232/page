@@ -31,6 +31,7 @@ class Database {
             color TEXT,
             age INTEGER,
             description TEXT,
+            image_url TEXT,
             user_id INTEGER,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users (id)
