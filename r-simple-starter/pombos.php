@@ -176,7 +176,7 @@ $allPigeons = $pigeon->getAll();
             <?php else: ?>
                 <div class="pigeon-grid">
                     <?php foreach ($allPigeons as $p): ?>
-                        <div class="pigeon-card">
+                        <div class="pigeon-card" onclick="window.location.href='pigeon-detail.php?id=<?php echo $p['id']; ?>'" style="cursor: pointer;">
                             <?php if ($p['image_url']): ?>
                                 <div class="pigeon-image" style="margin-bottom: 15px;">
                                     <img src="<?php echo htmlspecialchars($p['image_url']); ?>" 
@@ -207,6 +207,15 @@ $allPigeons = $pigeon->getAll();
                             <div class="owner-badge">
                                 <i class="fas fa-user"></i>
                                 <?php echo htmlspecialchars($p['username'] ?? 'Anônimo'); ?>
+                            </div>
+                            <div style="margin-top: 15px; text-align: center;">
+                                <?php 
+                                srand($p['id']); 
+                                $listPrice = rand(15, 150); 
+                                ?>
+                                <strong style="color: #28a745; font-size: 1.2em;">R$ <?php echo number_format($listPrice, 2, ',', '.'); ?></strong>
+                                <br>
+                                <small style="color: #007bff;">Clique para ver detalhes</small>
                             </div>
                         </div>
                     <?php endforeach; ?>

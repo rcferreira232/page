@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/classes/Pigeon.php';
+require_once __DIR__ . '/classes/Cart.php';
 
 // Simple PHP site converted from HTML
 // Page: Home/Index
@@ -14,6 +15,10 @@ $recentPigeons = array_slice($recentPigeons, 0, 6);
 // Obter cores únicas para os tags
 $allPigeons = $pigeon->getAll();
 $uniqueColors = array_unique(array_filter(array_column($allPigeons, 'color')));
+
+// Inicializar carrinho
+$cart = new Cart();
+$cartCount = $cart->getItemCount();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -56,6 +61,131 @@ $uniqueColors = array_unique(array_filter(array_column($allPigeons, 'color')));
         .no-pigeons-home i {
             display: block;
         }
+        
+        /* Cart Styles */
+        .cart-count {
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8em;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            min-width: 18px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .cart-btn {
+            position: relative;
+        }
+        
+        .pigeon-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        
+        .btn-cart {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-add-cart {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-add-cart:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+        
+        .btn-in-cart {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-in-cart:hover {
+            background: #dc3545;
+        }
+        
+        .pigeon-price {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 1.1em;
+        }
+        
+        .pigeon-card-home {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .pigeon-card-home {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .pigeon-clickable {
+            flex: 1;
+            transition: all 0.3s;
+        }
+        
+        .pigeon-clickable:hover {
+            transform: translateY(-2px);
+        }
+        
+        .pigeon-actions {
+            margin-top: auto;
+            padding-top: 10px;
+        }
+        
+        /* Loading states */
+        .btn-cart:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .toast.error {
+            background: #dc3545;
+        }
     </style>
 </head>
 <body>
@@ -79,8 +209,11 @@ $uniqueColors = array_unique(array_filter(array_column($allPigeons, 'color')));
                 <?php else: ?>
                     <a href="./login.php" class="nav-link">login</a>
                 <?php endif; ?>
-                <div class="nav-link contact-btn">
-                    <a href="./contact.php" class="btn">contact</a>
+                <div class="nav-link contact-btn cart-btn">
+                    <a href="./cart.php" class="btn" id="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count"><?php echo $cartCount; ?></span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -117,29 +250,48 @@ $uniqueColors = array_unique(array_filter(array_column($allPigeons, 'color')));
             <div class="pigeons-list">
                 <?php if (!empty($recentPigeons)): ?>
                     <?php foreach ($recentPigeons as $p): ?>
-                        <div class="pigeon">
-                            <?php if ($p['image_url']): ?>
-                                <img src="<?php echo htmlspecialchars($p['image_url']); ?>" 
-                                     alt="<?php echo htmlspecialchars($p['name']); ?>" 
-                                     class="img pigeon-img"
-                                     onerror="this.src='./img/pru.jpg'">
-                            <?php else: ?>
-                                <img src="./img/pru.jpg" alt="pigeon" class="img pigeon-img">
-                            <?php endif; ?>
-                            <h5><?php echo htmlspecialchars($p['color'] ?: 'Sem cor'); ?></h5>
-                            <p>
-                                <?php if ($p['breed']): ?>
-                                    <?php echo htmlspecialchars($p['breed']); ?> | 
+                        <div class="pigeon pigeon-card-home" data-pigeon-id="<?php echo $p['id']; ?>">
+                            <div class="pigeon-clickable" onclick="window.location.href='pigeon-detail.php?id=<?php echo $p['id']; ?>'" style="cursor: pointer;">
+                                <?php if ($p['image_url']): ?>
+                                    <img src="<?php echo htmlspecialchars($p['image_url']); ?>" 
+                                         alt="<?php echo htmlspecialchars($p['name']); ?>" 
+                                         class="img pigeon-img"
+                                         onerror="this.src='./img/pru.jpg'">
+                                <?php else: ?>
+                                    <img src="./img/pru.jpg" alt="pigeon" class="img pigeon-img">
                                 <?php endif; ?>
-                                <strong><?php echo htmlspecialchars($p['name']); ?></strong>
-                                <?php if ($p['age']): ?>
-                                    | <?php echo $p['age']; ?> meses
+                                <h5><?php echo htmlspecialchars($p['color'] ?: 'Sem cor'); ?></h5>
+                                <p>
+                                    <?php if ($p['breed']): ?>
+                                        <?php echo htmlspecialchars($p['breed']); ?> | 
+                                    <?php endif; ?>
+                                    <strong><?php echo htmlspecialchars($p['name']); ?></strong>
+                                    <?php if ($p['age']): ?>
+                                        | <?php echo $p['age']; ?> meses
+                                    <?php endif; ?>
+                                </p>
+                                <?php if ($p['description']): ?>
+                                    <p class="pigeon-desc"><?php echo htmlspecialchars(substr($p['description'], 0, 100)); ?><?php echo strlen($p['description']) > 100 ? '...' : ''; ?></p>
                                 <?php endif; ?>
-                            </p>
-                            <?php if ($p['description']): ?>
-                                <p class="pigeon-desc"><?php echo htmlspecialchars(substr($p['description'], 0, 100)); ?><?php echo strlen($p['description']) > 100 ? '...' : ''; ?></p>
-                            <?php endif; ?>
-                            <small>Por: <?php echo htmlspecialchars($p['username'] ?? 'Anônimo'); ?></small>
+                                <small>Por: <?php echo htmlspecialchars($p['username'] ?? 'Anônimo'); ?></small>
+                            </div>
+                            
+                            <div class="pigeon-actions">
+                                <?php if ($cart->hasItem($p['id'])): ?>
+                                    <button class="btn-cart btn-in-cart" onclick="event.stopPropagation(); removeFromCart(<?php echo $p['id']; ?>)">
+                                        <i class="fas fa-check"></i> No Carrinho
+                                    </button>
+                                <?php else: ?>
+                                    <button class="btn-cart btn-add-cart" onclick="event.stopPropagation(); addToCart(<?php echo $p['id']; ?>)">
+                                        <i class="fas fa-shopping-cart"></i> Adicionar
+                                    </button>
+                                <?php endif; ?>
+                                <?php 
+                                srand($p['id']); 
+                                $cardPrice = rand(15, 150); 
+                                ?>
+                                <span class="pigeon-price">R$ <?php echo number_format($cardPrice, 2, ',', '.'); ?></span>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -169,5 +321,138 @@ $uniqueColors = array_unique(array_filter(array_column($allPigeons, 'color')));
         </p>
     </footer>
     <script src="./js/app.js"></script>
+    
+    <!-- Cart JavaScript -->
+    <script>
+        // Toast notification function
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 100);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 3000);
+        }
+        
+        // Update cart count in navigation
+        function updateCartCount(count) {
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = count;
+                
+                // Add animation
+                cartCountElement.style.transform = 'scale(1.5)';
+                setTimeout(() => {
+                    cartCountElement.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }
+        
+        // Add to cart function
+        function addToCart(pigeonId) {
+            const button = document.querySelector(`[data-pigeon-id="${pigeonId}"] .btn-add-cart`);
+            if (button) {
+                button.disabled = true;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adicionando...';
+            }
+            
+            fetch('cart-actions.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=add&pigeon_id=${pigeonId}&quantity=1`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCartCount(data.cart_count);
+                    showToast(data.message, 'success');
+                    
+                    // Update button state
+                    if (button) {
+                        button.className = 'btn-cart btn-in-cart';
+                        button.innerHTML = '<i class="fas fa-check"></i> No Carrinho';
+                        button.onclick = () => removeFromCart(pigeonId);
+                    }
+                } else {
+                    showToast(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                showToast('Erro ao adicionar ao carrinho', 'error');
+            })
+            .finally(() => {
+                if (button) {
+                    button.disabled = false;
+                }
+            });
+        }
+        
+        // Remove from cart function
+        function removeFromCart(pigeonId) {
+            const button = document.querySelector(`[data-pigeon-id="${pigeonId}"] .btn-in-cart`);
+            if (button) {
+                button.disabled = true;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Removendo...';
+            }
+            
+            fetch('cart-actions.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=remove&pigeon_id=${pigeonId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCartCount(data.cart_count);
+                    showToast(data.message, 'success');
+                    
+                    // Update button state
+                    if (button) {
+                        button.className = 'btn-cart btn-add-cart';
+                        button.innerHTML = '<i class="fas fa-shopping-cart"></i> Adicionar';
+                        button.onclick = () => addToCart(pigeonId);
+                    }
+                } else {
+                    showToast(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                showToast('Erro ao remover do carrinho', 'error');
+            })
+            .finally(() => {
+                if (button) {
+                    button.disabled = false;
+                }
+            });
+        }
+        
+        // Load cart count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('cart-actions.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=get_count'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCartCount(data.cart_count);
+                }
+            })
+            .catch(error => console.error('Erro ao carregar contador:', error));
+        });
+    </script>
 </body>
 </html>
