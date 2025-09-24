@@ -268,7 +268,7 @@ $cartCount = $cart->getItemCount();
                     <?php else: ?>
                         <a href="./pombos.php">Ver todos</a>
                     <?php endif; ?>
-                    <a href="./pombos.php" style="background: #007bff; color: white;">Ver Todos</a>
+                    <a href="./pombos.php">Ver Todos</a>
                 </div>
             </div>
             <div class="pigeons-list">
