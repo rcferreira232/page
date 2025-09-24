@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Simple PHP site converted from HTML
 // Page: Home/Index
 ?>
@@ -33,8 +34,15 @@
             <div class="nav-links">
                 <a href="./index.php" class="nav-link">home</a>
                 <a href="./about.php" class="nav-link">about</a>
+                <a href="./pombos.php" class="nav-link">pombos</a>
                 <a href="./tags.php" class="nav-link">tags</a>
                 <a href="./base.php" class="nav-link">base</a>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="./dashboard.php" class="nav-link">dashboard</a>
+                    <a href="./logout.php" class="nav-link">logout</a>
+                <?php else: ?>
+                    <a href="./login.php" class="nav-link">login</a>
+                <?php endif; ?>
                 <div class="nav-link contact-btn">
                     <a href="./contact.php" class="btn">contact</a>
                 </div>
